@@ -19,4 +19,10 @@ public class UserDAO {
         return preparedStatement.executeQuery();
     }
 
+    public static ResultSet getUserResultSet(String username) throws SQLException, ClassNotFoundException {
+        String preSqlString = "Select a.username, a.password From user a Where a.username = ?";
+        PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+        preparedStatement.setString(1, username);
+        return preparedStatement.executeQuery();
+    }
 }

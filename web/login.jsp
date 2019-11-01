@@ -12,6 +12,7 @@
     <title>Đăng nhập hệ thống</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <link rel="icon" href="data:,">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -19,23 +20,23 @@
 </head>
 <body>
 <div class="container mt-3">
+    <% if ("true".equals(request.getAttribute(Constains.ATT_LOGIN_FAILED))) {%>
+    <div class="alert alert-danger" role="alert">
+        Username or Password was wrong!
+    </div>
+    <%}%>
     <div class="card col-4 mx-auto my-auto align-middle">
-        <% if ((boolean) request.getAttribute(Constains.ATT_LOGIN_FAILED)) {%>
-        <div class="alert alert-danger" role="alert">
-            Username or Password was wrong!
-        </div>
-        <%}%>
         <div class="row">
             <div class="card-body">
                 <h5 class="card-title">Đăng nhập hệ thống</h5>
-                <form action="/login" method="post">
+                <form action="<%=request.getContextPath()%>/login" method="post">
                     <div class="form-group">
                         <label for="username">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username">
+                        <input type="text" class="form-control" name="username" id="username">
                     </div>
                     <div class="form-group">
                         <label for="password">Mật khẩu</label>
-                        <input class="form-control" type="password" id="password">
+                        <input class="form-control" type="password" name="password" id="password">
                     </div>
                     <button class="btn btn-primary float-right" type="reset">Hủy</button>
                     <button class="btn btn-primary float-right mr-2" type="submit">Đăng nhập</button>

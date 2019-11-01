@@ -28,4 +28,20 @@ public class UserBO {
         }
         return user;
     }
+    public static User getUser(String username){
+        User user = null;
+        try{
+            ResultSet rs = UserDAO.getUserResultSet(username);
+            if(rs.next()){
+                user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
