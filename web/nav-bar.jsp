@@ -22,7 +22,7 @@
 
         </ul>
         <form action="<%=request.getContextPath() + "/students-search"%>" method="get" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="mssv, tên, khoa ...">
+            <input class="form-control mr-sm-2" type="text" id="key" name="key" placeholder="mssv, tên, khoa ...">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             <a href="<%= request.getContextPath() + "/logout"%>" class="btn btn-danger ml-2">Đăng xuất</a>
         </form>
