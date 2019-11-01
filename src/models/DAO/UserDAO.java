@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class UserDAO {
     public static ResultSet getUserResultSet(String username, String password) throws SQLException, ClassNotFoundException {
-        String preSqlString = "Select a.username, a.password From user a Where a.username = ? and a.password = ?";
+        String preSqlString = "Select a.id, a.username, a.password From user a Where a.username = ? and a.password = ?";
         PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
@@ -20,7 +20,7 @@ public class UserDAO {
     }
 
     public static ResultSet getUserResultSet(String username) throws SQLException, ClassNotFoundException {
-        String preSqlString = "Select a.username, a.password From user a Where a.username = ?";
+        String preSqlString = "Select a.id, a.username, a.password From user a Where a.username = ?";
         PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
         preparedStatement.setString(1, username);
         return preparedStatement.executeQuery();

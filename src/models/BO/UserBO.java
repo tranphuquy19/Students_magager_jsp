@@ -18,6 +18,7 @@ public class UserBO {
 
             if (rs.next()) { // Chỉ lấy bảng ghi đầu tiên
                 user = new User();
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
             }
@@ -34,6 +35,7 @@ public class UserBO {
             ResultSet rs = UserDAO.getUserResultSet(username);
             if(rs.next()){
                 user = new User();
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
             }
