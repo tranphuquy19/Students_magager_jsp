@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="models.Bean.Student" %>
+<%@ page import="utils.Constains" %><%--
   Created by IntelliJ IDEA.
   User: tranphuquy19
   Date: 31/10/2019
@@ -17,75 +19,66 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./dist/css/bootstrap.min.css">
     <%--    Font Awesome--%>
-<%--    <link rel="stylesheet" type="text/css" href="./dist/css/all.css">--%>
-    <script src="https://kit.fontawesome.com/455b3a19ce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./dist/css/all.css">
 </head>
 <body>
-<div class="container mt-3">
-    <form action="<%= request.getContextPath() + "/students"%>" method="get">
-        <div class="row">
-            <div class="col-md-4">
-                <select name="faculty" id="faculty" class="custom-select">
-                    <option value="" selected>--Chọn khoa--</option>
-                    <option value="1">Công nghệ thông tin</option>
-                    <option value="2">Điện tử viễn thông</option>
-                    <option value="3">Khoa hóa</option>
-                    <option value="4">Điện dân dụng</option>
-                </select>
+<div class="container-fluild">
+    <%@include file="nav-bar.jsp" %>
+
+    <div class="m-5">
+        <form action="<%= request.getContextPath() + "/students"%>" method="get">
+            <div class="row">
+                <div class="col-md-4">
+                    <select name="faculty" id="faculty" class="custom-select">
+                        <option value="" selected>--Chọn khoa--</option>
+                        <option value="1">Công nghệ thông tin</option>
+                        <option value="2">Điện tử viễn thông</option>
+                        <option value="3">Khoa hóa</option>
+                        <option value="4">Điện dân dụng</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Xem</button>
+                </div>
+                <div class="col-md-6 align-middle">
+                    <a href="<%= request.getContextPath() + "/students-create"%>" class="btn btn-primary">Tạo mới</a>
+                </div>
             </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">Xem</button>
-            </div>
-            <div class="col-md-6 mx-auto my-auto align-middle">
-                <a href="<%= request.getContextPath() + "/students-create"%>" class="btn btn-primary">Tạo mới</a>
-            </div>
-        </div>
-    </form>
+        </form>
 
-    <table class="table table-striped table-hover table-responsive-sm">
-        <thead>
-        <th>MSSV</th>
-        <th>Họ và tên</th>
-        <th>Giới tính</th>
-        <th>Khoa</th>
-        <th></th>
-        </thead>
-        <tbody>
-        <tr>
-            <td>102160258</td>
-            <td>Trần Phú Quy</td>
-            <td>Nam</td>
-            <td>Công nghệ thông tin</td>
-            <td>
-                <a href="#" class="text-primary mr-3"><i class="fas fa-edit"></i></a>
-                <a href="#" class="text-primary"><i class="far fa-trash-alt"></i></a>
-            </td>
-        </tr><tr>
-            <td>102160258</td>
-            <td>Trần Phú Quy</td>
-            <td>Nam</td>
-            <td>Công nghệ thông tin</td>
-            <td>
-                <a href="#" class="text-primary mr-3"><i class="fas fa-edit"></i></a>
-                <a href="#" class="text-primary"><i class="far fa-trash-alt"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>102160258</td>
-            <td>Trần Phú Quy</td>
-            <td>Nam</td>
-            <td>Công nghệ thông tin</td>
-            <td>
-                <a href="#" class="text-primary mr-3"><i class="fas fa-edit"></i></a>
-                <a href="#" class="text-primary"><i class="far fa-trash-alt"></i></a>
-            </td>
-        </tr>
+        <table class="table table-striped table-hover table-responsive-sm">
+            <thead>
+            <th style="width: 15%">MSSV</th>
+            <th style="width: 20%">Họ và tên</th>
+            <th style="width: 15%">Giới tính</th>
+            <th style="width: 35%">Khoa</th>
+            <th style="width: 15%"></th>
+            </thead>
+            <tbody>
+            <% ArrayList<Student> students = (ArrayList<Student>) request.getAttribute(Constains.STUDENTS_LIST);
+                for (Student student : students) {
+            %>
+            <tr>
+                <td><%=student.getId()%>
+                </td>
+                <td><%=student.getName()%>
+                </td>
+                <td><%=student.getMale() ? "Nam" : "Nữ"%>
+                </td>
+                <td><%=student.getFaculty()%>
+                </td>
+                <td>
+                    <a href="<%=request.getContextPath() + "/students-update?id="+ student.getId()%>"
+                       class="text-primary mr-3"><i class="fas fa-edit"></i></a>
+                    <a href="<%=request.getContextPath() + "/students-delete?id=" + student.getId()%>"
+                       class="text-primary"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            <% } %>
 
-
-
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->

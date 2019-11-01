@@ -4,7 +4,7 @@ package models.Bean;
  * @author tranphuquy19@gmail.com
  * @since 31/10/2019
  */
-public class SinhVien {
+public class Student {
     private int id;
     private String name;
     private Boolean male;
