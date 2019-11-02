@@ -2,6 +2,7 @@ package models.DAO;
 
 import database.DBConnect;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,5 +17,12 @@ public class StudentDAO {
 
         Statement statement = DBConnect.getConnection().createStatement();
         return statement.executeQuery(sqlString);
+    }
+
+    public static ResultSet getStudentsByFacultyId(int facultyId) throws SQLException, ClassNotFoundException {
+        String preSqlString = "SELECT student.id, student.name, student.male, faculty.name AS faculty FROM student inner JOIN faculty ON student.faculty_id = faculty.id Where faculty.id = ?";
+        PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+        preparedStatement.setInt(1, facultyId);
+        return preparedStatement.executeQuery();
     }
 }

@@ -1,6 +1,8 @@
 package controllers.student;
 
+import models.BO.FacultyBO;
 import models.BO.StudentBO;
+import models.Bean.Faculty;
 import models.Bean.Student;
 import utils.Constains;
 
@@ -25,14 +27,17 @@ public class StudentIndex extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Student> students = new ArrayList<>();
+        ArrayList<Faculty> faculties = new ArrayList<>();
         try {
             students = StudentBO.getStudents();
+            faculties = FacultyBO.getFaculties();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         request.setAttribute(Constains.STUDENTS_LIST, students);
+        request.setAttribute(Constains.FACULTIES_LIST, faculties);
         request.getRequestDispatcher("/list-sv.jsp").forward(request, response);
     }
 }

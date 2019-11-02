@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Bean.Student" %>
-<%@ page import="utils.Constains" %><%--
+<%@ page import="utils.Constains" %>
+<%@ page import="models.Bean.Faculty" %><%--
   Created by IntelliJ IDEA.
   User: tranphuquy19
   Date: 31/10/2019
@@ -22,19 +23,21 @@
     <link rel="stylesheet" type="text/css" href="./dist/css/all.css">
 </head>
 <body>
-<div class="container-fluild">
+<div class="container-fluild bg-light">
     <%@include file="nav-bar.jsp" %>
 
     <div class="m-5">
+        <%--        form chọn khoa--%>
         <form action="<%= request.getContextPath() + "/students"%>" method="get">
             <div class="row">
                 <div class="col-md-4">
-                    <select name="faculty" id="faculty" class="custom-select">
-                        <option value="" selected>--Chọn khoa--</option>
-                        <option value="1">Công nghệ thông tin</option>
-                        <option value="2">Điện tử viễn thông</option>
-                        <option value="3">Khoa hóa</option>
-                        <option value="4">Điện dân dụng</option>
+                    <select name="facultyId" id="facultyId" class="custom-select">
+                        <option value="defaultSelected" selected>--Chọn khoa--</option>
+                        <% ArrayList<Faculty> faculties = (ArrayList<Faculty>) request.getAttribute(Constains.FACULTIES_LIST);
+                            for (Faculty faculty : faculties) { %>
+                        <option value="<%=faculty.getId()%>"><%=faculty.getName()%>
+                        </option>
+                        <%}%>
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -46,6 +49,7 @@
             </div>
         </form>
 
+        <%--            Bảng danh sách sinh viên--%>
         <table class="table table-striped table-hover table-responsive-sm">
             <thead>
             <th style="width: 15%">MSSV</th>
@@ -75,7 +79,6 @@
                 </td>
             </tr>
             <% } %>
-
             </tbody>
         </table>
     </div>
