@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Bean.Student" %>
-<%@ page import="utils.Constains" %>
+<%@ page import="utils.Constants" %>
 <%@ page import="models.Bean.Faculty" %><%--
   Created by IntelliJ IDEA.
   User: tranphuquy19
@@ -32,8 +32,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <select name="facultyId" id="facultyId" class="custom-select">
-                        <option value="defaultSelected" selected>--Chọn khoa--</option>
-                        <% ArrayList<Faculty> faculties = (ArrayList<Faculty>) request.getAttribute(Constains.FACULTIES_LIST);
+                        <option value="<%=Constants.DEFAULT_SELECTED%>" selected>--Chọn khoa--</option>
+                        <% ArrayList<Faculty> faculties = (ArrayList<Faculty>) request.getAttribute(Constants.FACULTIES_LIST);
                             for (Faculty faculty : faculties) { %>
                         <option value="<%=faculty.getId()%>"><%=faculty.getName()%>
                         </option>
@@ -59,7 +59,7 @@
             <th style="width: 15%"></th>
             </thead>
             <tbody>
-            <% ArrayList<Student> students = (ArrayList<Student>) request.getAttribute(Constains.STUDENTS_LIST);
+            <% ArrayList<Student> students = (ArrayList<Student>) request.getAttribute(Constants.STUDENTS_LIST);
                 for (Student student : students) {
             %>
             <tr>

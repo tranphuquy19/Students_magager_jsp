@@ -2,7 +2,7 @@ package controllers.auth;
 
 import models.BO.UserBO;
 import models.Bean.User;
-import utils.Constains;
+import utils.Constants;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -23,7 +23,7 @@ public class CheckLogin implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        String currentUsername = (String) request.getSession().getAttribute(Constains.SS_LOGIN);
+        String currentUsername = (String) request.getSession().getAttribute(Constants.SS_LOGIN);
         if (currentUsername == null) response.sendRedirect(request.getContextPath() + "/login");
         else{
             User user = UserBO.getUser(currentUsername);

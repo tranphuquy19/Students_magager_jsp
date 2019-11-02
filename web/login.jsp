@@ -1,4 +1,4 @@
-<%@ page import="utils.Constains" %><%--
+<%@ page import="utils.Constants" %><%--
   Created by IntelliJ IDEA.
   User: tranphuquy19
   Date: 31/10/2019
@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="container mt-3">
-    <% if ("true".equals(request.getAttribute(Constains.ATT_LOGIN_FAILED))) {%>
+    <% if ("true".equals(request.getAttribute(Constants.ATT_LOGIN_FAILED))) {%>
     <div class="alert alert-danger" role="alert">
         Username or Password was wrong!
     </div>

@@ -2,7 +2,7 @@ package controllers.auth;
 
 import models.BO.UserBO;
 import models.Bean.User;
-import utils.Constains;
+import utils.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +23,10 @@ public class Login extends HttpServlet {
 
         User user = UserBO.getUser(username, password);
         if (user != null) {
-            request.getSession().setAttribute(Constains.SS_LOGIN, user.getUsername());
+            request.getSession().setAttribute(Constants.SS_LOGIN, user.getUsername());
             response.sendRedirect(request.getContextPath() + "/students");
         } else {
-            request.setAttribute(Constains.ATT_LOGIN_FAILED, "true");
+            request.setAttribute(Constants.ATT_LOGIN_FAILED, "true");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }

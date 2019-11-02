@@ -1,6 +1,6 @@
 package controllers.auth;
 
-import utils.Constains;
+import utils.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ public class Logout extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().removeAttribute(Constains.SS_LOGIN);
+        request.getSession().removeAttribute(Constants.SS_LOGIN);
         response.sendRedirect(request.getContextPath() + "/login");
     }
 }

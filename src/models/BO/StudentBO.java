@@ -15,6 +15,16 @@ public class StudentBO {
     public static ArrayList<Student> getStudents() throws SQLException, ClassNotFoundException {
         ArrayList<Student> students = new ArrayList<>();
         ResultSet rs = StudentDAO.getStudents();
+        return getStudents(students, rs);
+    }
+
+    public static ArrayList<Student> getStudentsByFacultyId(int facultyId) throws SQLException, ClassNotFoundException {
+        ArrayList<Student> students = new ArrayList<>();
+        ResultSet rs = StudentDAO.getStudentsByFacultyId(facultyId);
+        return getStudents(students, rs);
+    }
+
+    private static ArrayList<Student> getStudents(ArrayList<Student> students, ResultSet rs) throws SQLException {
         while(rs.next()){
             Student student = new Student();
             student.setId(rs.getInt("id"));
@@ -23,12 +33,6 @@ public class StudentBO {
             student.setFaculty(rs.getString("faculty"));
             students.add(student);
         }
-        return students;
-    }
-
-    public static ArrayList<Student> getStudentsByFacultyId(int facultyId) {
-        ArrayList<Student> students = new ArrayList<>();
-
         return students;
     }
 
