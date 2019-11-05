@@ -35,9 +35,7 @@ public class StudentIndex extends HttpServlet {
                 students = StudentBO.getStudentsByFacultyId(Integer.parseInt(facultyId));
             } else students = StudentBO.getStudents();
             faculties = FacultyBO.getFaculties();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         request.setAttribute(Constants.STUDENTS_LIST, students);

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container mt-3">
+<div class="container-fluid mt-3">
     <% if ("true".equals(request.getAttribute(Constants.ATT_LOGIN_FAILED))) {%>
     <div class="alert alert-danger" role="alert">
         Username or Password was wrong!

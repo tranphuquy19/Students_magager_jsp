@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="./dist/css/all.css">
 </head>
 <body>
-<div class="container-fluild bg-light">
+<div class="container-fluid bg-light">
     <%@include file="nav-bar.jsp" %>
 
     <div class="m-5">
