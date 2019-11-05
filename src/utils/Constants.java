@@ -7,6 +7,7 @@ package utils;
 public class Constants {
     public static final String ATT_LOGIN_FAILED = "ATT_LOGIN_FAILED";
     public static final String ATT_VALIDATOR = "ATT_VALIDATOR";
+    public static final String ATT_STUDENT = "ATT_STUDENT";
 
     public static final String SS_LOGIN = "SESSION_LOGIN";
 

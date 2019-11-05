@@ -20,9 +20,31 @@ public class StudentDAO {
     }
 
     public static ResultSet getStudentsByFacultyId(int facultyId) throws SQLException, ClassNotFoundException {
-        String preSqlString = "SELECT student.id, student.name, student.male, faculty.name AS faculty FROM student inner JOIN faculty ON student.faculty_id = faculty.id Where faculty.id = ?";
+        String preSqlString = "SELECT student.id, student.name, student.male, faculty.name AS faculty FROM student inner JOIN faculty ON student.faculty_id = faculty.id WHERE faculty.id = ?";
         PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
         preparedStatement.setInt(1, facultyId);
         return preparedStatement.executeQuery();
+    }
+
+    public static ResultSet getStudentById(int id) throws SQLException, ClassNotFoundException {
+        String preSqlString = "SELECT student.id, student.name, student.male, faculty.name AS faculty FROM student inner JOIN faculty ON student.faculty_id = faculty.id WHERE student.id = ?";
+        PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+        preparedStatement.setInt(1, id);
+        return preparedStatement.executeQuery();
+    }
+
+    public static Boolean addStudentWithId(int id, String name, boolean isMale, int facultyId) {
+        String preSqlString = "INSERT INTO student(id, name, male, faculty_id) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+            preparedStatement.setString(1, String.valueOf(id));
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, String.valueOf(isMale ? 1 : 0));
+            preparedStatement.setString(4, String.valueOf(facultyId));
+            return preparedStatement.execute();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

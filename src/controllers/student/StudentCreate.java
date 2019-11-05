@@ -1,7 +1,9 @@
 package controllers.student;
 
 import models.BO.FacultyBO;
+import models.BO.StudentBO;
 import models.Bean.Faculty;
+import models.Bean.Student;
 import utils.Constants;
 import utils.Validator;
 
@@ -21,14 +23,25 @@ import java.util.ArrayList;
 @WebServlet("/students-create")
 public class StudentCreate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        Boolean male = Boolean.valueOf(request.getParameter("male"));
+        Boolean male = Boolean.valueOf(request.getParameter("isMale"));
         int faculty = Integer.parseInt(request.getParameter("facultyId"));
-        System.out.println(id);
-        System.out.println(name);
-        System.out.println(male);
-        System.out.println(faculty);
+        try {
+            Validator validator = StudentBO.addStudent(id, name, male, faculty);
+            if (!validator.isOK()) {
+                ArrayList<Faculty> faculties = FacultyBO.getFaculties();
+
+                request.setAttribute(Constants.FACULTIES_LIST, faculties);
+                request.setAttribute(Constants.ATT_VALIDATOR, validator);
+                request.getRequestDispatcher("/new-sv.jsp").forward(request, response);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/students");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            request.getRequestDispatcher("/new-sv.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,12 +52,7 @@ public class StudentCreate extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        Validator val = new Validator();
-        val.put("id", 123, true, "Được");
-        val.put("name", "Trần Phú Quy", false, "Trống");
-        val.put("facultyId", 2, true, "Nà ní");
-        System.out.println(val.isOK());
-        request.setAttribute(Constants.ATT_VALIDATOR, val);
+        request.setAttribute(Constants.ATT_VALIDATOR, new Validator());
         request.setAttribute(Constants.FACULTIES_LIST, faculties);
         request.getRequestDispatcher("/new-sv.jsp").forward(request, response);
     }

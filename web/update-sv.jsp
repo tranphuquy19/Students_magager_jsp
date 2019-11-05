@@ -1,11 +1,12 @@
+<%@ page import="utils.Validator" %>
 <%@ page import="utils.Constants" %>
 <%@ page import="models.Bean.Faculty" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="utils.Validator" %><%--
+<%@ page import="models.Bean.Student" %><%--
   Created by IntelliJ IDEA.
   User: tranphuquy19
-  Date: 02/11/2019
-  Time: 16:14
+  Date: 06/11/2019
+  Time: 00:21
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,7 +26,9 @@
 <body>
 <div class="container-fluid bg-light">
     <%@include file="nav-bar.jsp" %>
-    <% Validator validator = (Validator) request.getAttribute(Constants.ATT_VALIDATOR); %>
+    <% Validator validator = (Validator) request.getAttribute(Constants.ATT_VALIDATOR);
+        Student student = (Student) request.getAttribute(Constants.ATT_STUDENT);
+    %>
     <div class="card col-6 m-5">
         <div class="row">
             <div class="card-body">
@@ -36,7 +39,7 @@
                         <label for="id" class="col-md-2 col-form-label">MSSV</label>
                         <div class="form-group col-md-10">
                             <input type="number" class="form-control <%= validator.is("id")%>" name="id" id="id"
-                                   value="<%=validator.getCurrentValue("id")%>">
+                                   value="<%=student.getId()%>" disabled>
                             <%= validator.getFeedbackHTML("id")%>
                         </div>
                     </div>
@@ -44,7 +47,8 @@
                     <div class="form-row">
                         <label for="name" class="col-md-2 col-form-label">Họ tên</label>
                         <div class="form-group col-md-10">
-                            <input type="text" class="form-control <%= validator.is("name")%>" name="name" id="name" value="<%= validator.getCurrentValue("name")%>">
+                            <input type="text" class="form-control <%= validator.is("name")%>" name="name" id="name"
+                                   value="<%= student.getName()%>">
                             <%= validator.getFeedbackHTML("name")%>
                         </div>
                     </div>
@@ -98,7 +102,11 @@
 <script src="./dist/js/popper.min.js"></script>
 <script src="./dist/js/bootstrap.min.js"></script>
 <script>
+    <% if(!validator.isOK()) {%>
     $('#facultyId').val('<%= validator.getCurrentValue("facultyId")%>');
+    <%} else {%>
+    $("input[name=isMale][value=" + <%=String.valueOf(student.getMale())%> +"]").attr('checked', 'checked');
+    <%}%>
 </script>
 </body>
 </html>

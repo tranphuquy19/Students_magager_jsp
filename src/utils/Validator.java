@@ -8,39 +8,49 @@ import java.util.HashMap;
  */
 public class Validator {
     private HashMap<String, Message> validator = new HashMap<>();
-    private boolean isOK;
+    private boolean isOK = true;
 
     public Validator() {
     }
 
     /**
-     *
-     * @param key Trường name của input
+     * @param key          Trường name của input
      * @param currentValue Giá trị khi submit
-     * @param isValid Hợp lệ
-     * @param mess Thông báo lên View
+     * @param isValid      Hợp lệ
+     * @param mess         Thông báo lên View
      */
     public void put(String key, Object currentValue, boolean isValid, String mess) {
         if (!isValid) this.isOK = false;
         validator.put(key, new Message(currentValue, isValid, mess));
     }
 
-    public Object getCurrentValue(String key){
-        return validator.get(key).currentValue;
+    public void update(String key, Object currentValue, boolean isValid, String mess) {
+        if (!isValid) this.isOK = false;
+        Message mss = validator.replace(key, new Message(currentValue, isValid, mess));
+    }
+
+    public Object getCurrentValue(String key) {
+        if (validator.containsKey(key))
+            return validator.get(key).currentValue;
+        else return " ";
     }
 
     public String getFeedbackHTML(String key) {
-        Message m = validator.get(key);
-        String mess = "<div class=\"";
-        if (m.isValid)
-            mess += "valid";
-        else mess += "invalid";
-        mess += "-feedback\">" + m.mess + "</div>";
-        return mess;
+        if (validator.containsKey(key)) {
+            Message m = validator.get(key);
+            String mess = "<div class=\"";
+            if (m.isValid)
+                mess += "valid";
+            else mess += "invalid";
+            mess += "-feedback\">" + (m.mess == null ? "" : m.mess) + "</div>";
+            return mess;
+        } else return " ";
     }
 
     public String is(String key) {
-        return validator.get(key).isValid ? "is-valid" : "is-invalid";
+        if (validator.containsKey(key))
+            return validator.get(key).isValid ? "is-valid" : "is-invalid";
+        else return " ";
     }
 
     public boolean isOK() {
@@ -49,6 +59,14 @@ public class Validator {
 
     public void setOK(boolean OK) {
         isOK = OK;
+    }
+
+    @Override
+    public String toString() {
+        return "Validator{" +
+                "validator=" + validator +
+                ", isOK=" + isOK +
+                '}';
     }
 
     /**

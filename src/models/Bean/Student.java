@@ -41,4 +41,14 @@ public class Student {
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", male=" + male +
+                ", faculty='" + faculty + '\'' +
+                '}';
+    }
 }
