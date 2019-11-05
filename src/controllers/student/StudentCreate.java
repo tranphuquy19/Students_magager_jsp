@@ -21,20 +21,29 @@ import java.util.ArrayList;
 @WebServlet("/students-create")
 public class StudentCreate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        Boolean male = Boolean.valueOf(request.getParameter("male"));
+        int faculty = Integer.parseInt(request.getParameter("facultyId"));
+        System.out.println(id);
+        System.out.println(name);
+        System.out.println(male);
+        System.out.println(faculty);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Faculty> faculties = new ArrayList<>();
 
-        try{
+        try {
             faculties = FacultyBO.getFaculties();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         Validator val = new Validator();
-        val.put("id", true, "Được");
-        val.put("name", false, "Trống");
+        val.put("id", 123, true, "Được");
+        val.put("name", "Trần Phú Quy", false, "Trống");
+        val.put("facultyId", 2, true, "Nà ní");
+        System.out.println(val.isOK());
         request.setAttribute(Constants.ATT_VALIDATOR, val);
         request.setAttribute(Constants.FACULTIES_LIST, faculties);
         request.getRequestDispatcher("/new-sv.jsp").forward(request, response);

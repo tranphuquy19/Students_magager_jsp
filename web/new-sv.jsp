@@ -35,16 +35,17 @@
                     <div class="form-row">
                         <label for="id" class="col-md-2 col-form-label">MSSV</label>
                         <div class="form-group col-md-10">
-                            <input type="text" class="form-control <%= validator.is("id")%>" name="id" id="id">
-                            <%= validator.getMessHTML("id")%>
+                            <input type="text" class="form-control <%= validator.is("id")%>" name="id" id="id"
+                                   value="<%=validator.getCurrentValue("id")%>">
+                            <%= validator.getFeedbackHTML("id")%>
                         </div>
                     </div>
                     <%--    Input field name--%>
                     <div class="form-row">
                         <label for="name" class="col-md-2 col-form-label">Họ tên</label>
                         <div class="form-group col-md-10">
-                            <input type="text" class="form-control <%= validator.is("name")%>" name="name" id="name">
-                            <%= validator.getMessHTML("name")%>
+                            <input type="text" class="form-control <%= validator.is("name")%>" name="name" id="name" value="<%= validator.getCurrentValue("name")%>">
+                            <%= validator.getFeedbackHTML("name")%>
                         </div>
                     </div>
                     <%--    Input field gender--%>
@@ -61,13 +62,12 @@
                                 <label for="male2" class="form-check-label">Nữ</label>
                             </div>
                         </div>
-
                     </div>
                     <%--    Input field faculty--%>
                     <div class="form-row">
                         <label for="facultyId" class="col-md-2 col-form-label">Khoa</label>
                         <div class="form-group col-md-10">
-                            <select name="facultyId" id="facultyId" class="form-control is-valid">
+                            <select name="facultyId" id="facultyId" class="form-control <%=validator.is("facultyId")%>">
                                 <option value="<%= Constants.DEFAULT_SELECTED%>" selected>---Chọn khoa---</option>
                                 <% ArrayList<Faculty> faculties = (ArrayList<Faculty>) request.getAttribute(Constants.FACULTIES_LIST);
                                     for (Faculty faculty : faculties) { %>
@@ -75,7 +75,7 @@
                                 </option>
                                 <%}%>
                             </select>
-                            <div class="valid-feedback">Nó ok</div>
+                            <%= validator.getFeedbackHTML("facultyId")%>
                         </div>
                     </div>
                     <%--    button--%>
@@ -97,5 +97,8 @@
 <script src="./dist/js/jquery-3.3.1.slim.min.js"></script>
 <script src="./dist/js/popper.min.js"></script>
 <script src="./dist/js/bootstrap.min.js"></script>
+<script>
+    $('#facultyId').val('<%= validator.getCurrentValue("facultyId")%>');
+</script>
 </body>
 </html>
