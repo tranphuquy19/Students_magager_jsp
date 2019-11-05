@@ -1,6 +1,7 @@
 <%@ page import="utils.Constants" %>
 <%@ page import="models.Bean.Faculty" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utils.Validator" %><%--
   Created by IntelliJ IDEA.
   User: tranphuquy19
   Date: 02/11/2019
@@ -24,6 +25,7 @@
 <body>
 <div class="container-fluid bg-light">
     <%@include file="nav-bar.jsp" %>
+    <% Validator validator = (Validator) request.getAttribute(Constants.ATT_VALIDATOR); %>
     <div class="card col-6 m-5">
         <div class="row">
             <div class="card-body">
@@ -33,16 +35,16 @@
                     <div class="form-row">
                         <label for="id" class="col-md-2 col-form-label">MSSV</label>
                         <div class="form-group col-md-10">
-                            <input type="text" class="form-control is-invalid" name="id" id="id">
-                            <div class="valid-feedback">Look Goods!</div>
-                            <div class="invalid-feedback">Error!</div>
+                            <input type="text" class="form-control <%= validator.is("id")%>" name="id" id="id">
+                            <%= validator.getMessHTML("id")%>
                         </div>
                     </div>
                     <%--    Input field name--%>
                     <div class="form-row">
                         <label for="name" class="col-md-2 col-form-label">Họ tên</label>
                         <div class="form-group col-md-10">
-                            <input type="text" class="form-control" name="name" id="name">
+                            <input type="text" class="form-control <%= validator.is("name")%>" name="name" id="name">
+                            <%= validator.getMessHTML("name")%>
                         </div>
                     </div>
                     <%--    Input field gender--%>
@@ -65,14 +67,15 @@
                     <div class="form-row">
                         <label for="facultyId" class="col-md-2 col-form-label">Khoa</label>
                         <div class="form-group col-md-10">
-                            <select name="facultyId" id="facultyId" class="form-control">
-                                <option value="<%= Constants.DEFAULT_SELECTED%>" selected>--Chọn khoa---</option>
+                            <select name="facultyId" id="facultyId" class="form-control is-valid">
+                                <option value="<%= Constants.DEFAULT_SELECTED%>" selected>---Chọn khoa---</option>
                                 <% ArrayList<Faculty> faculties = (ArrayList<Faculty>) request.getAttribute(Constants.FACULTIES_LIST);
                                     for (Faculty faculty : faculties) { %>
                                 <option value="<%=faculty.getId()%>"><%=faculty.getName()%>
                                 </option>
                                 <%}%>
                             </select>
+                            <div class="valid-feedback">Nó ok</div>
                         </div>
                     </div>
                     <%--    button--%>

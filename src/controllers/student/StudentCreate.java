@@ -3,6 +3,7 @@ package controllers.student;
 import models.BO.FacultyBO;
 import models.Bean.Faculty;
 import utils.Constants;
+import utils.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,10 @@ public class StudentCreate extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        Validator val = new Validator();
+        val.put("id", true, "Được");
+        val.put("name", false, "Trống");
+        request.setAttribute(Constants.ATT_VALIDATOR, val);
         request.setAttribute(Constants.FACULTIES_LIST, faculties);
         request.getRequestDispatcher("/new-sv.jsp").forward(request, response);
     }
