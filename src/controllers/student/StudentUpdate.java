@@ -23,7 +23,33 @@ import java.util.ArrayList;
 @WebServlet("/students-update")
 public class StudentUpdate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        Boolean isMale = Boolean.valueOf(request.getParameter("isMale"));
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
 
+        Validator validator = StudentBO.updateStudent(id, name, isMale, facultyId);
+
+        if (validator.isOK()) {
+            response.sendRedirect(request.getContextPath() + "/students");
+        } else {
+            Student student = new Student();
+            ArrayList<Faculty> faculties = new ArrayList<>();
+
+            try {
+                student = StudentBO.getStudentById(id);
+                faculties = FacultyBO.getFaculties();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            request.setAttribute(Constants.ATT_VALIDATOR, validator);
+            request.setAttribute(Constants.FACULTIES_LIST, faculties);
+            request.setAttribute(Constants.ATT_STUDENT, student);
+            request.getRequestDispatcher("/update-sv.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

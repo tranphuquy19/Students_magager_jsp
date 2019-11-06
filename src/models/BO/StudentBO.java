@@ -51,6 +51,12 @@ public class StudentBO {
         return val;
     }
 
+    public static Validator updateStudent(int id, String name, boolean isMale, int facultyId){
+        Validator val = putCurrentValues(id, name, isMale, facultyId);
+        StudentDAO.updateStudentWithId(id, name, isMale, facultyId);
+        return val;
+    }
+
     public static Student getStudentById(int id) throws SQLException, ClassNotFoundException {
         Student student = null;
         ResultSet rs = StudentDAO.getStudentById(id);

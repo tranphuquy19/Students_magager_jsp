@@ -9,17 +9,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Title</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <link rel="icon" href="data:,">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Trang chính</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="icon" href="data:,">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="./dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./dist/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container-fluid">
+    <%@include file="nav-bar.jsp" %>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="./dist/js/jquery-3.3.1.slim.min.js"></script>

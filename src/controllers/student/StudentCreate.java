@@ -25,10 +25,11 @@ public class StudentCreate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        Boolean male = Boolean.valueOf(request.getParameter("isMale"));
-        int faculty = Integer.parseInt(request.getParameter("facultyId"));
+        Boolean isMale = Boolean.valueOf(request.getParameter("isMale"));
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+
         try {
-            Validator validator = StudentBO.addStudent(id, name, male, faculty);
+            Validator validator = StudentBO.addStudent(id, name, isMale, facultyId);
             if (!validator.isOK()) {
                 ArrayList<Faculty> faculties = FacultyBO.getFaculties();
 

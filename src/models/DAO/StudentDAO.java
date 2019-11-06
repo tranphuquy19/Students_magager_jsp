@@ -47,4 +47,19 @@ public class StudentDAO {
             return false;
         }
     }
+
+    public static Boolean updateStudentWithId(int id, String name, boolean isMale, int facultyId) {
+        String preSqlString = "UPDATE student SET name = ?, male = ?, faculty_id = ? WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, String.valueOf(isMale ? 1 : 0));
+            preparedStatement.setString(3, String.valueOf(facultyId));
+            preparedStatement.setString(4, String.valueOf(id));
+            return preparedStatement.execute();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
