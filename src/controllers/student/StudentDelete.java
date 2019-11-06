@@ -23,8 +23,12 @@ import java.util.ArrayList;
 @WebServlet("/students-delete")
 public class StudentDelete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        System.out.println(id);
+        int id = Integer.parseInt(request.getParameter("id"));
+        if(StudentBO.deleteStudentById(id)){
+            response.sendRedirect(request.getContextPath() + "/students");
+        }else{
+
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -62,4 +62,26 @@ public class StudentDAO {
             return false;
         }
     }
+
+    public static Boolean deteleStudentById(int id) {
+        String preSqlString = "DELETE FROM student WHERE student.id = ?";
+        try {
+            PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.execute();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static ResultSet findStudentsByKey(String key) throws SQLException, ClassNotFoundException {
+        key = "%" + key + "%";
+        String preSqlString = "SELECT s.id, s.name, s.male, f.name as faculty FROM student s inner JOIN faculty f ON s.faculty_id = f.id WHERE s.id LIKE ? OR s.name LIKE ? OR f.name LIKE ?";
+        PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(preSqlString);
+        preparedStatement.setString(1, key);
+        preparedStatement.setString(2, key);
+        preparedStatement.setString(3, key);
+        return preparedStatement.executeQuery();
+    }
 }

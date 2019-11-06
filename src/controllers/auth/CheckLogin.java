@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author tranphuquy19@gmail.com
  * @since 01/11/2019
  */
-@WebFilter(urlPatterns = {"/students", "/students-create", "/students-update", "/students-delete", "/students-search", "/list-sv.jsp"})
+@WebFilter(urlPatterns = {"/students", "/students-create", "/students-update", "/students-delete", "/students-search", "/list-sv.jsp", "/new-sv.jsp", "/search-results.jsp", "/update-sv.jsp"})
 public class CheckLogin implements Filter {
     public void destroy() {
     }
@@ -23,7 +23,6 @@ public class CheckLogin implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        System.out.println(request.getRequestURI());
         String currentUsername = (String) request.getSession().getAttribute(Constants.SS_LOGIN);
         if (currentUsername == null) response.sendRedirect(request.getContextPath() + "/login");
         else {

@@ -12,7 +12,7 @@
     <title>Trang chính</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <link rel="icon" href="data:,">
+    <link rel="shortcut icon" type="image/png" href="./dist/img/team.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -20,7 +20,8 @@
 </head>
 <body>
 <div class="container-fluid">
-    <%@include file="nav-bar.jsp" %>
+    <h1>Chương trình quản lí sinh viên</h1>
+    <a class="btn btn-lg btn-warning" href="<%=request.getContextPath() + "/students"%>">Đi đến danh sách sinh viên</a>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

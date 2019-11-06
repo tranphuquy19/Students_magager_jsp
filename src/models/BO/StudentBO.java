@@ -57,6 +57,10 @@ public class StudentBO {
         return val;
     }
 
+    public static Boolean deleteStudentById(int id){
+        return StudentDAO.deteleStudentById(id);
+    }
+
     public static Student getStudentById(int id) throws SQLException, ClassNotFoundException {
         Student student = null;
         ResultSet rs = StudentDAO.getStudentById(id);
@@ -80,10 +84,10 @@ public class StudentBO {
         return val;
     }
 
-    public static ArrayList<Student> findStudents(String key) {
+    public static ArrayList<Student> findStudents(String key) throws SQLException, ClassNotFoundException {
         ArrayList<Student> students = new ArrayList<>();
-
-        return students;
+        ResultSet rs = StudentDAO.findStudentsByKey(key);
+        return getStudents(students, rs);
     }
 
     public boolean createStudent(Student student) {
