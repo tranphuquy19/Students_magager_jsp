@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2019 at 11:49 AM
+-- Generation Time: Nov 06, 2019 at 09:18 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `student_manager`
 --
+CREATE DATABASE IF NOT EXISTS `student_manager` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `student_manager`;
 
 -- --------------------------------------------------------
 
@@ -63,10 +65,13 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `name`, `male`, `faculty_id`) VALUES
-(1, 'Trần Phú Quy', 1, 1),
+(1, 'Trần Phú Quy', 1, 3),
 (2, 'Trần Chí Vĩ', 1, 6),
 (3, 'Trần Thu Sương', 0, 5),
-(4, 'Bùi Thị Kiều', 0, 2);
+(4, 'Bùi Thị Kiều', 0, 2),
+(5, 'Võ Tường Huân', 1, 3),
+(6, 'Nguyễn Văn Thừa', 0, 2),
+(102168222, ' Nguyễn Thanh Huyền', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +132,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102168223;
 
 --
 -- AUTO_INCREMENT for table `user`

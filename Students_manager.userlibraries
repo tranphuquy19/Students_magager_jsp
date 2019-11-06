@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="mysql:mysql-connector-java:8.0.17">
+    <archive path="/home/tranphuquy19/Documents/Students_manager/lib/mysql-connector-java-8.0.17.jar" />
+    <archive path="/home/tranphuquy19/Documents/Students_manager/lib/protobuf-java-3.6.1.jar" />
+  </library>
+  <library name="bootstrap">
+    <archive path="/home/tranphuquy19/.IntelliJIdea2019.2/config/javascript/extLibs/http_stackpath.bootstrapcdn.com_bootstrap_4.3.1_js_bootstrap.js" />
+  </library>
+</eclipse-userlibraries>
+
