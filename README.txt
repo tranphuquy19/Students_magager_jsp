@@ -29,6 +29,11 @@ Các lớp dùng chung(utils)
 
 
 ------------------------CẤU HÌNH------------------------
+SQL File
+1. student_manager.sql
+    Mô tả: Tạo cấu trúc các bảng, quan hệ và dữ liệu các bảng
+    Đường dẫn: <root-project>/docs/student_manager.sql
+
 Các thư viện
 1. mysql-connector-java-8.0.17.jar
     Mục đích sử dụng: Hỗ trợ kết nối MysqlDB
